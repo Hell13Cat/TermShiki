@@ -1,4 +1,4 @@
-print("TermSiki v 0.0.2a")
+print("TermShiki v 0.0.2a")
 print("[i]Загрузка модулей...")
 import os
 import json
