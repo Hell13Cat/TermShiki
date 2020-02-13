@@ -1,4 +1,4 @@
-print("TermSiki v 0.0.1a")
+print("TermSiki v 0.0.2a")
 print("[i]Загрузка модулей...")
 import os
 import json
@@ -17,13 +17,21 @@ except:
 	print("[e]requests не установлен\n[i]Установка модуля prettytable...")
 	os.system("pip install prettytable")
 	print("[i]Готово")
-from ex_module.pyshikiapi import API
-import system
+try:
+	from pyshikiapi import API
+except:
+	print("[e]pyshikiapi не установлен\n[i]Установка модуля prettytable...")
+	os.system("pip install pyshikiapi")
+	print("[i]Готово")
+import dif.system as system
 print("[i]Успешно")
 
 app_name = system.load_info("app_name")
 client_id = system.load_info("client_id")
 client_secret = system.load_info("client_secret")
+
+def clearShell():
+	os.system(['clear', 'cls'][os.name == os.sys.platform])
 
 def request_top(api, page):
 	req_get_data = api.animes.GET(page=page, limit=10)
@@ -45,6 +53,8 @@ if system.check_token()==0:
 else:
 	api = API(app_name, client_id, client_secret, system.token_file_load())
 	print("[i]Авторизация была совершена ранее")
+clearShell()
+system.logo_print()
 
 print("[i]help - для помощи")
 exit = "0"
@@ -62,6 +72,10 @@ while exit == "0":
 		exit = "1"
 	elif cmd_root == "cls":
 		os.system("cls")
+	elif cmd_root == "bug":
+		print("[i]Отрываем браузер...")
+		url_issues = "https://github.com/Hell13Cat/TermShiki/issues"
+		webbrowser.open(url_issues, new=0, autoraise=True)
 	elif cmd_root == "top":
 		try:
 			aaa = int(cmd_split[1])
@@ -71,6 +85,7 @@ while exit == "0":
 	elif cmd_root == "help":
 		print("""Команды:
 top [страница] -  Топ аниме на шики
+bug - Оставить информацию о баге
 unlogin - Выйти из аккаунта
 exit - Выйти из приложения""")
 	else:
