@@ -1,6 +1,6 @@
 
 # TermShiki
 
-v 0.0.1a
+Требуется Python3 для запуска!
 
 Клиент shikimori.one для терминала
